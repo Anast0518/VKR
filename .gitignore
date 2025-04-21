@@ -1,0 +1,7 @@
+sight_recognizer1.pt
+sight_recognizer_pretrained.pt
+sight_recognizer_pretrained_555.pt
+sight_recognizer_pretrained_666.pt
+sight_recognizer_pretrained_new.pt
+handler.py
+config.py

@@ -1,0 +1,35 @@
+incorrect_data/810874650_индустриальное сердце.jpg,индустриальное сердце
+incorrect_data/810874650_я не знаю.jpg,я не знаю
+incorrect_data/810874650_Ќет.jpg,Ќет
+incorrect_data/810874650_я не знаю.jpg,я не знаю
+incorrect_data/810874650_растение.jpg,растение
+incorrect_data/810874650_–астение1.jpg,–астение1
+incorrect_data/810874650_я не знаю.jpg,я не знаю
+incorrect_data/810874650_no.jpg,no
+incorrect_data/810874650_no.jpg,no
+incorrect_data/810874650_no.jpg,no
+incorrect_data/810874650_no.jpg,no
+incorrect_data/810874650_no.jpg,no
+incorrect_data/810874650_I_don't_know.jpg,I_don't_know
+incorrect_data/810874650_I_don't_know.jpg,I_don't_know
+incorrect_data/810874650_gorkiypark.jpg,gorkiypark
+incorrect_data/810874650_I_don't_know.jpg,I_don't_know
+incorrect_data/810874650_I_don't_know.jpg,I_don't_know
+incorrect_data/810874650_I_don't_know.jpg,I_don't_know
+incorrect_data/810874650_I_don't_know.jpg,I_don't_know
+incorrect_data/810874650_I_don't_know.jpg,I_don't_know
+incorrect_data/810874650_i_don't_know.jpg,i_don't_know
+incorrect_data/810874650_sheflera.jpg,sheflera
+incorrect_data/810874650_клещ.jpg,клещ
+incorrect_data/810874650_space.jpg,space
+incorrect_data/810874650_fish.jpg,fish
+incorrect_data/810874650_fishka.jpg,fishka
+incorrect_data/810874650_fish.jpg,fish
+incorrect_data/810874650_fish.jpg,fish
+incorrect_data/810874650_fish.jpg,fish
+incorrect_data/810874650_1_fish.jpg,fish
+incorrect_data/810874650_1_fish.jpg,fish
+incorrect_data/810874650_2_fish.jpg,fish
+incorrect_data/810874650_1_theatre_gorki.jpg,theatre_gorki
+incorrect_data/810874650_1_theatre.jpg,theatre
+incorrect_data/810874650_1_sholohov.jpg,sholohov

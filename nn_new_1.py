@@ -18,6 +18,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
 from torchvision.models import AlexNet_Weights
+from sklearn.metrics import classification_report
 
 def init_random_seed(value=0):
     random.seed(value)
@@ -150,6 +151,31 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=30, patience=
     model.load_state_dict(best_model_wts)
     return model
 
+def extract_features(model, dataloader, device):
+    """Извлекает признаки из предпоследнего слоя сети для всех изображений"""
+    model.eval()
+    features = []
+    filenames = []
+    class_names = []
+    
+    with torch.no_grad():
+        for inputs, labels in tqdm(dataloader):
+            inputs = inputs.to(device)
+            # Получаем выходы до последнего слоя (предпоследний слой)
+            outputs = model.model.features(inputs)
+            outputs = model.model.avgpool(outputs)
+            outputs = torch.flatten(outputs, 1)
+            features.append(outputs.cpu().numpy())
+            
+            # Сохраняем информацию о файлах и классах
+            batch_filenames = [dataloader.dataset.filenames[i] for i in range(inputs.size(0))]
+            filenames.extend(batch_filenames)
+            batch_class_names = [batch_filenames[i].split('_')[0] for i in range(len(batch_filenames))]
+            class_names.extend(batch_class_names)
+    
+    features = numpy.vstack(features)
+    return features, filenames, class_names
+
 # Функция для построения графика функции потерь
 def loss_function_graph(train_loss_history, val_loss_history):
     plt.figure(figsize= (10, 5))
@@ -186,7 +212,6 @@ def show_augmentation_example(dataset, idx=0):
 
 
 def plot_confusion_matrix(model, dataloader, class_names):
-    """Функция для построения матрицы ошибок"""
     model.eval()
     all_preds = []
     all_labels = []
@@ -194,18 +219,23 @@ def plot_confusion_matrix(model, dataloader, class_names):
     with torch.no_grad():
         for inputs, labels in dataloader:
             inputs = inputs.to(device)
+            labels = labels.to(device)  # Переносим метки на device
             outputs = model(inputs)
             _, preds = torch.max(outputs, 1)
             
             all_preds.extend(preds.cpu().numpy())
             all_labels.extend(labels.cpu().numpy())
     
-    # Фильтруем None метки
-    valid_indices = [i for i, label in enumerate(all_labels) if label is not None]
-    all_labels = [all_labels[i] for i in valid_indices]
-    all_preds = [all_preds[i] for i in valid_indices]
+    # Проверяем, что нет пропущенных меток
+    print("Примеры меток:", all_labels[:10])
+    print("Примеры предсказаний:", all_preds[:10])
+    
+    # Убедимся, что метки соответствуют class_names
+    print("Уникальные метки в all_labels:", numpy.unique(all_labels))
     
     cm = confusion_matrix(all_labels, all_preds)
+    print("Матрица ошибок (сырая):\n", cm)
+    
     cm_df = pandas.DataFrame(cm, index=class_names, columns=class_names)
     
     plt.figure(figsize=(10, 8))
@@ -214,6 +244,9 @@ def plot_confusion_matrix(model, dataloader, class_names):
     plt.ylabel('Истинные классы')
     plt.xlabel('Предсказанные классы')
     plt.show()
+    
+    # Выводим отчёт о классификации
+    print(classification_report(all_labels, all_preds, target_names=class_names))
 
 if __name__ == '__main__':
     init_random_seed()
@@ -278,6 +311,20 @@ if __name__ == '__main__':
     # Сохранение модели
     input_tensor = torch.rand(1, 3, 224, 224)       
     script_model = torch.jit.trace(model.to(torch.device("cpu")), input_tensor)
-    NAME = 'sight_recognizer_pretrained_666'
+    NAME = 'sight_recognizer_pretrained_888'
     script_model.save("C:/Users/anast/Desktop/VKR/"+NAME+".pt")
+
+    print("Создание базы векторных представлений...")
+    all_features, all_filenames, all_class_names = extract_features(model, dataloaders['val'], device)
+    
+    vector_db = {
+        'features': all_features,
+        'filenames': all_filenames,
+        'class_names': all_class_names,
+        'class_to_idx': image_datasets['train'].class_to_idx
+    }
+    
+    with open('vector_database.pkl', 'wb') as f:
+        pickle.dump(vector_db, f)
+    print("База векторов успешно сохранена!")
  

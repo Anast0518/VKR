@@ -174,6 +174,11 @@ landmark_coordinates = {
 # Словарь для хранения выбранного языка пользователя
 user_languages = {}
 
+# Проверка на id
+@bot.message_handler(commands=['id'])
+def send_id(message):
+    bot.reply_to(message, f"Ваш chat_id: {message.chat.id}")
+
 # Функция для создания клавиатуры выбора языка
 def language_keyboard():
     keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)

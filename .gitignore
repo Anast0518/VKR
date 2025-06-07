@@ -5,3 +5,6 @@ sight_recognizer_pretrained_666.pt
 sight_recognizer_pretrained_new.pt
 handler.py
 config.py
+sight_recognizer_pretrained_777.pt
+*.pt
+/venv

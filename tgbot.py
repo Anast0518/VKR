@@ -15,13 +15,12 @@ logger = logging.getLogger(__name__)
 
 bot = telebot.TeleBot(config.TOKEN)
 # Указываем список классов
-classes = ['artrmuseum', 'cathedralvirgin', 'cityadministration', 'gorkipark', 'greecetemple', 'lampsfera', 'loremuseum', 
-           'mechanicalheart', 'monumentcossacks', 'monumentrostovchanka', 'monumentstella', 'paramonovmension', 'pokrovskitemple', 
-           'publiclibrary', 'sobornialleyway', 'theatredrami', 'undergroundmosaic', 'cherevichkin', 'cranes', 'dancing', 'gorkimonument', 
-           'grandpashukar', 'grigoriiaksinya', 'mummonument', 'nahalenok', 'readerofeveningrostov', 'rzd', 'sholohovmonument', 'svai', 'tamozna', 
-           'voroshmost', 'wheel']
+classes = ['artmuseum', 'cathedralvirgin', 'cherevichkin', 'cityadministration', 'cranes', 'dancing', 'gorkimonument', 'gorkipark', 'grandpashukar',        
+          'greecetemple', 'grigoriiaksinya', 'lampsfera', 'loremuseum', 'mechanicalheart', 'monumentcossacks', 'monumentrostovchanka',
+          'monumentstella', 'mummonument', 'nahalenok', 'paramonovmension', 'pokrovskitemple', 'publiclibrary', 'readerofeveningrostov',
+          'rzd', 'sholohovmonument', 'sobornialleyway', 'svai', 'tamozna', 'theatredrami', 'undergroundmosaic', 'voroshmost', 'wheel']
 # Загружаем модель в формате файла
-model = torch.jit.load('sight_recognizer_pretrained_666.pt')
+model = torch.jit.load('sight_recognizer_pretrained_999.pt')
 transform = transforms.Compose( 
     [transforms.Resize(224),
      transforms.ToTensor(),
